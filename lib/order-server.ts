@@ -210,7 +210,10 @@ const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 5;
 const hits = new Map<string, number[]>();
 
-/** In-memory, so it resets on restart and is per process. Fine for one PM2 process. */
+/**
+ * In-memory, so it's per server instance and resets when one starts. On Netlify each function instance keeps its
+ * own count, so this slows down a flood from one address rather than being an exact limit.
+ */
 export function isRateLimited(ip: string, now = Date.now()): boolean {
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
   if (recent.length >= MAX_PER_WINDOW) {
@@ -226,8 +229,11 @@ export function isRateLimited(ip: string, now = Date.now()): boolean {
   return false;
 }
 
-/** Nginx sets X-Real-IP (see DEPLOY.md), overwriting anything the visitor sent. */
+/**
+ * The visitor's address. Netlify sets x-nf-client-connection-ip itself, so a visitor can't fake it; X-Real-IP and
+ * X-Forwarded-For cover running behind another proxy (e.g. Nginx).
+ */
 export function clientIp(headers: Headers): string {
   const forwarded = headers.get("x-forwarded-for")?.split(",").pop()?.trim();
-  return headers.get("x-real-ip")?.trim() || forwarded || "unknown";
+  return headers.get("x-nf-client-connection-ip")?.trim() || headers.get("x-real-ip")?.trim() || forwarded || "unknown";
 }

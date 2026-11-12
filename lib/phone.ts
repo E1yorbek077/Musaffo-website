@@ -1,6 +1,15 @@
+import { branch, telHref } from "@/data/branch";
+
 /** Uzbek phone numbers: +998 XX XXX XX XX. Shared by the order form and the order API. */
 
-export const SALES_PHONE = { display: "+998 78 120-33-34", tel: "+998781203334" };
+/** The main brand's sales line in Tashkent, from the price list. */
+const HEAD_OFFICE_PHONE = { display: "+998 78 120-33-34", tel: "+998781203334" };
+
+/**
+ * The number customers are told to call (order slips, a failed order): the Khorezm branch's own phone. Until it is
+ * filled in (data/branch.ts), the head office's sales line stands in, so there is always someone to call.
+ */
+export const SALES_PHONE = branch.phone ? { display: branch.phone, tel: telHref(branch.phone).slice(4) } : HEAD_OFFICE_PHONE;
 
 /**
  * The 9 digits after +998, from the field's content. Numbers can really start with 998 (operator 99),

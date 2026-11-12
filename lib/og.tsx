@@ -54,12 +54,12 @@ const alpha = (hex: string, a: number) => {
 
 const render = (element: React.ReactElement) => new ImageResponse(element, { ...OG_SIZE, fonts: FONTS });
 
-function Footer({ color }: { color: string }) {
+/** The logo and the branch's name ("Musaffo Xorazm"): this site is the Khorezm branch, not musaffo.uz. */
+function Footer({ color, site }: { color: string; site: string }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- rendered to PNG at build time, not a page */}
       <img src={LOGO} width={190} height={59} alt="" />
-      <div style={{ display: "flex", fontSize: 26, fontWeight: 800, color }}>musaffo.uz</div>
+      <div style={{ display: "flex", fontSize: 26, fontWeight: 800, color }}>{site}</div>
     </div>
   );
 }
@@ -152,11 +152,10 @@ export function productCard(product: Product, locale: Locale) {
             <Chip ink={tint.ink}>{perBox}</Chip>
           </div>
         </div>
-        <Footer color={tint.ink} />
+        <Footer color={tint.ink} site={getDictionary(locale).meta.siteName} />
       </div>
       <div style={{ display: "flex", flex: 1, alignItems: "flex-end", justifyContent: "center", gap: 26, paddingBottom: 55 }}>
         {packs.map((p, i) => (
-          // eslint-disable-next-line @next/next/no-img-element -- rendered to PNG at build time, not a page
           <img key={i} src={p.src} width={p.width} height={p.height} alt="" />
         ))}
       </div>
@@ -188,14 +187,13 @@ function Shelf({ images, height }: { images: string[]; height: number }) {
       {images.map((image) => {
         const p = pack(image);
         const size = fit(p, each, height);
-        // eslint-disable-next-line @next/next/no-img-element -- rendered to PNG at build time, not a page
         return <img key={image} src={p.src} width={size.width} height={size.height} alt="" />;
       })}
     </div>
   );
 }
 
-export function shelfCard({ eyebrow, title, subtitle, images }: { eyebrow?: string; title: string; subtitle: string; images: string[] }) {
+export function shelfCard({ eyebrow, title, subtitle, images, site }: { eyebrow?: string; title: string; subtitle: string; images: string[]; site: string }) {
   return render(
     // The solid colour under the gradient keeps the edges fully opaque.
     <div style={{ display: "flex", width: "100%", height: "100%", backgroundColor: "#0077be", backgroundImage: BLUE, fontFamily: "Nunito", color: "#ffffff" }}>
@@ -207,10 +205,9 @@ export function shelfCard({ eyebrow, title, subtitle, images }: { eyebrow?: stri
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <div style={{ display: "flex", background: "#ffffff", borderRadius: 999, padding: "10px 22px" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element -- rendered to PNG at build time, not a page */}
             <img src={LOGO} width={180} height={56} alt="" />
           </div>
-          <div style={{ display: "flex", fontSize: 26, fontWeight: 800 }}>musaffo.uz</div>
+          <div style={{ display: "flex", fontSize: 26, fontWeight: 800 }}>{site}</div>
         </div>
       </div>
       <div style={{ display: "flex", flex: 1, alignItems: "center", justifyContent: "center", paddingRight: 24 }}>

@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 import { categories, products } from "@/data/products";
 import { defaultLocale, locales } from "@/i18n";
-import { SITE_URL } from "@/lib/catalog";
+import { siteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const SITE_URL = siteUrl();
   const paths = [
     "/",
     "/catalog/",

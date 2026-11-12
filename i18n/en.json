@@ -1,15 +1,15 @@
 {
   "meta": {
-    "siteName": "Musaffo",
-    "homeTitle": "Musaffo: dairy product catalog",
-    "homeDescription": "The Musaffo product catalog: drinking and thick yogurts, glazed curd snacks, milk, butter, qatiq, kefir and ayran.",
+    "siteName": "Musaffo Khorezm",
+    "homeTitle": "Musaffo Khorezm: dairy product catalog",
+    "homeDescription": "The official Musaffo branch in Khorezm. Product catalog: drinking and thick yogurts, glazed curd snacks, milk, butter, qatiq, kefir and ayran.",
     "catalogTitle": "Product catalog",
     "catalogDescription": "All Musaffo products: filter by category, fat content and brand.",
     "categoryDescription": "Musaffo: {category}. Products, fat content, sizes and storage conditions.",
     "contactsTitle": "Contacts",
-    "contactsDescription": "Contact Musaffo (MCHJ QK «Milk House»).",
+    "contactsDescription": "Contact the Musaffo Khorezm branch.",
     "aboutTitle": "About us",
-    "aboutDescription": "Musaffo is a dairy brand by MCHJ QK «Milk House» in Tashkent, with a history going back to 1974."
+    "aboutDescription": "Musaffo Khorezm is the official branch and distributor of Musaffo products (MCHJ QK «Milk House») in the Khorezm region. The brand’s history goes back to 1974."
   },
   "nav": {
     "home": "Home",
@@ -52,6 +52,8 @@
   },
   "about": {
     "eyebrow": "About us",
+    "branchTitle": "The official Musaffo branch in Khorezm",
+    "branchText": "Musaffo Khorezm is the official branch and distributor, in the Khorezm region, of Musaffo products made by MCHJ QK «Milk House».",
     "title": "Musaffo: a dairy brand from Tashkent",
     "intro": "Musaffo is a dairy brand by MCHJ QK «Milk House», Tashkent.",
     "numbersTitle": "Key numbers",
@@ -357,16 +359,20 @@
   },
   "contacts": {
     "title": "Contacts",
-    "placeholder": "Contact details will be added soon.",
+    "intro": "The official Musaffo branch in Khorezm.",
+    "brand": "Brand",
+    "telegram": "Telegram",
+    "hours": "Working hours",
+    "openMap": "Open in maps",
     "producer": "Producer",
     "website": "Website",
     "phone": "Phone",
     "email": "Email",
-    "address": "Address",
-    "soon": "Coming soon"
+    "address": "Address"
   },
   "footer": {
     "producer": "Producer: MCHJ QK «Milk House»",
+    "mainSite": "Main Musaffo brand website",
     "categories": "Categories",
     "pages": "Pages"
   },

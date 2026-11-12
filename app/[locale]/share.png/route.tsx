@@ -1,4 +1,4 @@
-import { isLocale, locales } from "@/i18n";
+import { getDictionary, isLocale, locales } from "@/i18n";
 import { shelfCard } from "@/lib/og";
 import { brandCardText } from "@/lib/share";
 
@@ -23,5 +23,5 @@ const SHELF = [
 export async function GET(_request: Request, { params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) return new Response(null, { status: 404 });
-  return shelfCard({ ...brandCardText(locale), images: SHELF });
+  return shelfCard({ ...brandCardText(locale), images: SHELF, site: getDictionary(locale).meta.siteName });
 }

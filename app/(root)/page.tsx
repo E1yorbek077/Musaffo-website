@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { defaultLocale } from "@/i18n";
+import { defaultLocale, getDictionary } from "@/i18n";
 
 const target = `/${defaultLocale}/`;
+const siteName = getDictionary(defaultLocale).meta.siteName;
 
 export const metadata: Metadata = {
-  title: "Musaffo",
+  title: siteName,
   robots: { index: false },
 };
 
@@ -13,7 +14,7 @@ export default function RootRedirectPage() {
   return (
     <>
       <meta httpEquiv="refresh" content={`0; url=${target}`} />
-      <a href={target}>Musaffo</a>
+      <a href={target}>{siteName}</a>
     </>
   );
 }

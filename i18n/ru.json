@@ -1,15 +1,15 @@
 {
   "meta": {
-    "siteName": "Musaffo",
-    "homeTitle": "Musaffo — каталог молочной продукции",
-    "homeDescription": "Каталог продукции Musaffo: питьевые и густые йогурты, глазированные сырки, молоко, сливочное масло, катык, кефир и айран.",
+    "siteName": "Musaffo Хорезм",
+    "homeTitle": "Musaffo Хорезм — каталог молочной продукции",
+    "homeDescription": "Официальный филиал Musaffo в Хорезме. Каталог продукции: питьевые и густые йогурты, глазированные сырки, молоко, сливочное масло, катык, кефир и айран.",
     "catalogTitle": "Каталог продукции",
     "catalogDescription": "Вся продукция Musaffo: фильтры по категории, жирности и бренду.",
     "categoryDescription": "Musaffo: {category}. Продукция, жирность, объём и условия хранения.",
     "contactsTitle": "Контакты",
-    "contactsDescription": "Контакты Musaffo (MCHJ QK «Milk House»).",
+    "contactsDescription": "Контакты филиала Musaffo Хорезм.",
     "aboutTitle": "О нас",
-    "aboutDescription": "Musaffo — бренд молочной продукции компании MCHJ QK «Milk House» из Ташкента. История предприятия начинается с 1974 года."
+    "aboutDescription": "Musaffo Хорезм — официальный филиал и дистрибьютор продукции Musaffo (MCHJ QK «Milk House») в Хорезмской области. История бренда начинается с 1974 года."
   },
   "nav": {
     "home": "Главная",
@@ -52,6 +52,8 @@
   },
   "about": {
     "eyebrow": "О нас",
+    "branchTitle": "Официальный филиал Musaffo в Хорезме",
+    "branchText": "Musaffo Хорезм — официальный филиал и дистрибьютор продукции Musaffo, которую производит MCHJ QK «Milk House», в Хорезмской области.",
     "title": "Musaffo — бренд молочной продукции из Ташкента",
     "intro": "Musaffo — бренд молочной продукции компании MCHJ QK «Milk House», Ташкент.",
     "numbersTitle": "Ключевые показатели",
@@ -402,16 +404,20 @@
   },
   "contacts": {
     "title": "Контакты",
-    "placeholder": "Контактные данные скоро появятся.",
+    "intro": "Официальный филиал Musaffo в Хорезме.",
+    "brand": "Бренд",
+    "telegram": "Telegram",
+    "hours": "Часы работы",
+    "openMap": "Открыть на карте",
     "producer": "Производитель",
     "website": "Сайт",
     "phone": "Телефон",
     "email": "Эл. почта",
-    "address": "Адрес",
-    "soon": "Скоро"
+    "address": "Адрес"
   },
   "footer": {
     "producer": "Производитель: MCHJ QK «Milk House»",
+    "mainSite": "Основной сайт бренда Musaffo",
     "categories": "Категории",
     "pages": "Страницы"
   },

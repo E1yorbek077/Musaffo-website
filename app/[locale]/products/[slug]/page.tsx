@@ -3,9 +3,11 @@ import { notFound } from "next/navigation";
 import { ProductDetail } from "@/components/ProductDetail";
 import { products } from "@/data/products";
 import { getDictionary, type Locale } from "@/i18n";
-import { getProduct, SITE_URL, variantsOf } from "@/lib/catalog";
+import { getProduct, variantsOf } from "@/lib/catalog";
+import { siteUrl } from "@/lib/site-url";
 import { pageMetadata } from "@/lib/seo";
 import { productShareImage } from "@/lib/share";
+import { productTitle } from "@/lib/titles";
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> };
 
@@ -22,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMetadata({
     locale,
     path: `/products/${slug}/`,
-    title: `${product.name[locale]} | Musaffo`,
+    title: productTitle(product, locale),
     description: product.description[locale],
     shareImage: productShareImage(locale, product),
   });
@@ -42,7 +44,7 @@ export default async function ProductPage({ params }: Props) {
     category: dict.categories[product.category],
     brand: { "@type": "Brand", name: product.line === "engil" ? "Engil" : "Musaffo" },
     manufacturer: { "@type": "Organization", name: "MCHJ QK «Milk House»" },
-    image: product.sizes.map((s) => `${SITE_URL}${s.image}`),
+    image: product.sizes.map((s) => `${siteUrl()}${s.image}`),
   };
 
   return (

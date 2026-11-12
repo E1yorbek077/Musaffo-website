@@ -51,7 +51,12 @@ export function fanOf(list: Product[]): Product[] {
   for (let i = 0; roundRobin.length < list.length; i++) groups.forEach((g) => g[i] && roundRobin.push(g[i]));
   const picked: Product[] = [];
   const tints = new Set<Tint>();
-  for (const p of roundRobin) if (picked.length < MAX_PACKS && !tints.has(p.tint)) (picked.push(p), tints.add(p.tint));
+  for (const p of roundRobin) {
+    if (picked.length < MAX_PACKS && !tints.has(p.tint)) {
+      picked.push(p);
+      tints.add(p.tint);
+    }
+  }
   for (const p of roundRobin) if (picked.length < MAX_PACKS && !picked.includes(p)) picked.push(p);
   // [0, 1, 2, 3, 4] → [3, 1, 0, 2, 4]: the first pick in the centre.
   const arranged: Product[] = [];

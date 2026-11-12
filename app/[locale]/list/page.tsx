@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { OrderListPage } from "@/components/OrderListPage";
 import { getDictionary, type Locale } from "@/i18n";
 import { pageMetadata } from "@/lib/seo";
+import { pageTitle } from "@/lib/titles";
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ...pageMetadata({
       locale,
       path: "/list/",
-      title: `${dict.list.title} | Musaffo`,
+      title: pageTitle(dict.list.title, locale),
       description: dict.list.emptyHint,
     }),
     // A personal list has no value in search results.

@@ -1,0 +1,9 @@
+# Netlify builds the site with its Next.js runtime (detected automatically): pages are pre-rendered and
+# /api/order runs as a serverless function. Environment variables are set in the Netlify UI, not here.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Next.js 16 needs Node.js 20.9 or newer.
+  NODE_VERSION = "22"

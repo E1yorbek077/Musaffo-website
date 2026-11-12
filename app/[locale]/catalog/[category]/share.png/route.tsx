@@ -1,5 +1,5 @@
 import { categories, type CategorySlug } from "@/data/products";
-import { isLocale, locales } from "@/i18n";
+import { getDictionary, isLocale, locales } from "@/i18n";
 import { productsInCategory } from "@/lib/catalog";
 import { shelfCard } from "@/lib/og";
 import { categoryCardText } from "@/lib/share";
@@ -17,7 +17,12 @@ export async function GET(_request: Request, { params }: { params: Promise<{ loc
   const { locale, category: slug } = await params;
   const category = categories.find((c) => c.slug === slug);
   if (!category || !isLocale(locale)) return new Response(null, { status: 404 });
-  return shelfCard({ eyebrow: "Musaffo", ...categoryCardText(locale, category.slug), images: shelfImages(category.slug, category.images) });
+  return shelfCard({
+    eyebrow: "Musaffo",
+    ...categoryCardText(locale, category.slug),
+    images: shelfImages(category.slug, category.images),
+    site: getDictionary(locale).meta.siteName,
+  });
 }
 
 /** The category's own card images, topped up with other flavours: 4 packs, or 3 for wide cups. */

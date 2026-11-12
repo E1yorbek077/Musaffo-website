@@ -11,6 +11,7 @@ import { categories, type CategorySlug, type Product } from "@/data/products";
 import { getDictionary, type Locale } from "@/i18n";
 import { formatSize, webpPath } from "@/lib/format";
 import { tintStyle } from "@/lib/tints";
+import { productTitle } from "@/lib/titles";
 
 /** Width of one pack's slot on the stage, per pack shape. Capped so the PDF images aren't over-stretched. */
 const SLOT: Record<CategorySlug, string> = {
@@ -66,9 +67,9 @@ export function ProductDetail({ product: initial, variants, locale }: { product:
   // Keeps the tab title and description right after a switch that didn't load a new page.
   const description = product.description[locale];
   useEffect(() => {
-    document.title = `${name} | Musaffo`;
+    document.title = productTitle(product, locale);
     document.querySelector('meta[name="description"]')?.setAttribute("content", description);
-  }, [name, description]);
+  }, [product, locale, description]);
 
   /* Keep the active chip in view in the sideways-scrolling row on phones. */
   const chipRow = useRef<HTMLDivElement>(null);

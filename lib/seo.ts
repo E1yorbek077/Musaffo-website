@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { defaultLocale, locales, type Locale } from "@/i18n";
-import { SITE_URL } from "./catalog";
+import { defaultLocale, getDictionary, locales, type Locale } from "@/i18n";
 import { brandShareImage, type ShareImage } from "./share";
+import { siteUrl } from "./site-url";
 
 const OG_LOCALES: Record<Locale, string> = { uz: "uz_UZ", ru: "ru_RU", en: "en_US" };
 
@@ -20,13 +20,15 @@ export function pageMetadata(opts: {
   const { locale, path, title, description } = opts;
   const share = opts.shareImage ?? brandShareImage(locale);
   const images = [{ url: share.url, alt: share.alt, width: 1200, height: 630, type: "image/png" }];
-  const url = (l: Locale) => `${SITE_URL}/${l}${path}`;
+  const base = siteUrl();
+  const url = (l: Locale) => `${base}/${l}${path}`;
+  const siteName = getDictionary(locale).meta.siteName;
   return {
-    metadataBase: new URL(SITE_URL),
+    metadataBase: new URL(base),
     title,
     description,
     manifest: `/manifest-${locale}.webmanifest`,
-    appleWebApp: { capable: true, title: "Musaffo", statusBarStyle: "default" },
+    appleWebApp: { capable: true, title: siteName, statusBarStyle: "default" },
     alternates: {
       canonical: url(locale),
       languages: {
@@ -38,7 +40,7 @@ export function pageMetadata(opts: {
       title,
       description,
       url: url(locale),
-      siteName: "Musaffo",
+      siteName,
       locale: OG_LOCALES[locale],
       type: "website",
       images,

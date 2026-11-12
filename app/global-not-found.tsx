@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import Link from "next/link";
 import { defaultLocale, getDictionary, locales } from "@/i18n";
+import { pageTitle } from "@/lib/titles";
 import "./globals.css";
 
 const nunito = Nunito({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-nunito", display: "swap" });
 
-export const metadata: Metadata = { title: "404 | Musaffo", robots: { index: false } };
+export const metadata: Metadata = { title: pageTitle("404", defaultLocale), robots: { index: false } };
 
 // The static 404 page can't know the visitor's language, so it shows all of them.
 export default function GlobalNotFound() {

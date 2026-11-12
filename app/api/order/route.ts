@@ -1,5 +1,3 @@
-import { appendFile, mkdir } from "node:fs/promises";
-import path from "node:path";
 import { buildTelegramMessages, clientIp, createOrderNumber, isRateLimited, validateOrder, type Order } from "@/lib/order-server";
 
 export const dynamic = "force-dynamic";
@@ -57,18 +55,6 @@ async function sendToTelegram(messages: string[], location: Order["location"]): 
   return true;
 }
 
-/** Backup of every order, whether or not Telegram worked. One JSON object per line. */
-async function saveOrder(order: Order, orderNumber: string, telegram: "sent" | "failed") {
-  const file = process.env.ORDERS_FILE || path.join(process.cwd(), "data", "orders.jsonl");
-  try {
-    await mkdir(path.dirname(file), { recursive: true });
-    const line = JSON.stringify({ orderNumber, createdAt: new Date().toISOString(), telegram, ...order });
-    await appendFile(file, `${line}\n`, { encoding: "utf8", mode: 0o600 });
-  } catch (error) {
-    console.error(`[order] Could not save ${orderNumber}: ${error instanceof Error ? error.message : "unknown error"}`);
-  }
-}
-
 export async function POST(request: Request) {
   const raw = await request.text();
   if (Buffer.byteLength(raw) > MAX_BODY_BYTES) return json({ ok: false, error: "too_large" }, 413);
@@ -90,11 +76,11 @@ export async function POST(request: Request) {
   if (isRateLimited(clientIp(request.headers))) return json({ ok: false, error: "rate_limited" }, 429);
 
   const orderNumber = createOrderNumber();
+  // Telegram is the only place orders go: on Netlify the filesystem isn't kept between requests, so nothing is written.
   const sent = await sendToTelegram(buildTelegramMessages(result.order, orderNumber), result.order.location);
-  await saveOrder(result.order, orderNumber, sent ? "sent" : "failed");
 
   if (!sent) {
-    console.error(`[order] ${orderNumber} was saved but did not reach the manager`);
+    console.error(`[order] ${orderNumber} did not reach the manager`);
     return json({ ok: false, error: "delivery", orderNumber }, 502);
   }
   return json({ ok: true, orderNumber });

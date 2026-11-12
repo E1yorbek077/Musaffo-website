@@ -4,9 +4,14 @@ out/
 next-env.d.ts
 *.tsbuildinfo
 
-# Secrets. Real values go in .env.local; .env.example stays in git.
+# Secrets. Real values go in .env.local (or Netlify's environment variables); .env.example stays in git.
+.env
+.env.local
 .env*
 !.env.example
+
+# Netlify CLI's local state
+.netlify/
 
 # Customer orders: names, phone numbers and addresses.
 data/orders.jsonl

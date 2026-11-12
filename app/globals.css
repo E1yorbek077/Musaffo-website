@@ -248,6 +248,8 @@ body {
   backdrop-filter: blur(5px);
   box-shadow: 18px 0 40px rgb(0 30 70 / 0.25);
   pointer-events: none;
+  /* The door swings to -100°: past 90° the browser would draw its back, a mirrored logo at the hinge. */
+  backface-visibility: hidden;
   animation: door-open 1.15s cubic-bezier(0.55, 0.05, 0.3, 1) 0.4s both;
 }
 

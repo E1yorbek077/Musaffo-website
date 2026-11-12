@@ -8,6 +8,7 @@ import { getCategory } from "@/lib/catalog";
 import { fill } from "@/lib/format";
 import { pageMetadata } from "@/lib/seo";
 import { categoryShareImage } from "@/lib/share";
+import { pageTitle } from "@/lib/titles";
 
 type Props = { params: Promise<{ locale: Locale; category: CategorySlug }> };
 
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMetadata({
     locale,
     path: `/catalog/${category}/`,
-    title: `${name} | Musaffo`,
+    title: pageTitle(name, locale),
     description: fill(dict.meta.categoryDescription, { category: name }),
     shareImage: categoryShareImage(locale, category),
   });

@@ -41,12 +41,12 @@ export function productCardAlt(product: Product, locale: Locale) {
 
 export function brandShareImage(locale: Locale): ShareImage {
   const t = brandCardText(locale);
-  return { url: `/${locale}/share.png`, alt: `Musaffo: ${t.title}, ${t.subtitle}` };
+  return { url: `/${locale}/share.png`, alt: `${getDictionary(locale).meta.siteName}: ${t.title}, ${t.subtitle}` };
 }
 
 export function categoryShareImage(locale: Locale, slug: CategorySlug): ShareImage {
   const t = categoryCardText(locale, slug);
-  return { url: `/${locale}/catalog/${slug}/share.png`, alt: `Musaffo: ${t.title}, ${t.subtitle}` };
+  return { url: `/${locale}/catalog/${slug}/share.png`, alt: `${getDictionary(locale).meta.siteName}: ${t.title}, ${t.subtitle}` };
 }
 
 export function productShareImage(locale: Locale, product: Product): ShareImage {

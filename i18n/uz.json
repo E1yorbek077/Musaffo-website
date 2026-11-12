@@ -1,15 +1,15 @@
 {
   "meta": {
-    "siteName": "Musaffo",
-    "homeTitle": "Musaffo — sut mahsulotlari katalogi",
-    "homeDescription": "Musaffo mahsulotlari katalogi: ichimlik va quyuq yogurtlar, glazurlangan siroklar, sut, sariyog‘, qatiq, kefir va ayron.",
+    "siteName": "Musaffo Xorazm",
+    "homeTitle": "Musaffo Xorazm — sut mahsulotlari katalogi",
+    "homeDescription": "Musaffo’ning rasmiy Xorazm filiali. Mahsulotlar katalogi: ichimlik va quyuq yogurtlar, glazurlangan siroklar, sut, sariyog‘, qatiq, kefir va ayron.",
     "catalogTitle": "Mahsulotlar katalogi",
     "catalogDescription": "Barcha Musaffo mahsulotlari: toifa, yog‘lilik va brend bo‘yicha filtrlang.",
     "categoryDescription": "Musaffo: {category}. Mahsulotlar, yog‘lilik, hajm va saqlash shartlari.",
     "contactsTitle": "Aloqa",
-    "contactsDescription": "Musaffo (MCHJ QK «Milk House») bilan aloqa.",
+    "contactsDescription": "Musaffo Xorazm filiali bilan aloqa.",
     "aboutTitle": "Biz haqimizda",
-    "aboutDescription": "Musaffo — Toshkentdagi MCHJ QK «Milk House» kompaniyasining sut mahsulotlari brendi. Tarixi 1974-yildan boshlanadi."
+    "aboutDescription": "Musaffo Xorazm — MCHJ QK «Milk House» ishlab chiqaradigan Musaffo mahsulotlarining Xorazm viloyatidagi rasmiy filiali va distribyutori. Brend tarixi 1974-yildan boshlanadi."
   },
   "nav": {
     "home": "Bosh sahifa",
@@ -52,6 +52,8 @@
   },
   "about": {
     "eyebrow": "Biz haqimizda",
+    "branchTitle": "Musaffo’ning Xorazmdagi rasmiy filiali",
+    "branchText": "Musaffo Xorazm — MCHJ QK «Milk House» ishlab chiqaradigan Musaffo mahsulotlarining Xorazm viloyatidagi rasmiy filiali va distribyutori.",
     "title": "Musaffo — Toshkentdan sut mahsulotlari brendi",
     "intro": "Musaffo — MCHJ QK «Milk House» kompaniyasining sut mahsulotlari brendi, Toshkent.",
     "numbersTitle": "Asosiy ko‘rsatkichlar",
@@ -357,16 +359,20 @@
   },
   "contacts": {
     "title": "Aloqa",
-    "placeholder": "Aloqa ma’lumotlari tez orada qo‘shiladi.",
+    "intro": "Musaffo’ning Xorazmdagi rasmiy filiali.",
+    "brand": "Brend",
+    "telegram": "Telegram",
+    "hours": "Ish vaqti",
+    "openMap": "Xaritada ochish",
     "producer": "Ishlab chiqaruvchi",
     "website": "Veb-sayt",
     "phone": "Telefon",
     "email": "Elektron pochta",
-    "address": "Manzil",
-    "soon": "Tez orada"
+    "address": "Manzil"
   },
   "footer": {
     "producer": "Ishlab chiqaruvchi: MCHJ QK «Milk House»",
+    "mainSite": "Musaffo brendining asosiy sayti",
     "categories": "Toifalar",
     "pages": "Sahifalar"
   },

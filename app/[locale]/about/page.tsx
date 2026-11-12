@@ -3,9 +3,11 @@ import type { ReactNode } from "react";
 import { CertificateGallery } from "@/components/CertificateGallery";
 import Link from "@/components/Link";
 import { FactoryIcon, LeafIcon, ShieldCheckIcon } from "@/components/TrustBlock";
+import { MAIN_BRAND_SITE } from "@/data/branch";
 import { categories, products } from "@/data/products";
 import { getDictionary, type Locale } from "@/i18n";
 import { pageMetadata } from "@/lib/seo";
+import { pageTitle } from "@/lib/titles";
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -15,14 +17,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMetadata({
     locale,
     path: "/about/",
-    title: `${dict.meta.aboutTitle} | Musaffo`,
+    title: pageTitle(dict.meta.aboutTitle, locale),
     description: dict.meta.aboutDescription,
   });
 }
 
 export default async function AboutPage({ params }: Props) {
   const { locale } = await params;
-  const { about } = getDictionary(locale);
+  const dict = getDictionary(locale);
+  const { about } = dict;
 
   const stats: { top?: string; value: string; bottom?: string }[] = [
     { top: about.statSinceTop, value: about.statSinceValue, bottom: about.statSinceBottom },
@@ -48,8 +51,21 @@ export default async function AboutPage({ params }: Props) {
       <section className="relative overflow-hidden bg-[linear-gradient(105deg,#0190d2_0%,#0077be_38%,#005aa9_72%)] text-white">
         <div className="mx-auto max-w-4xl px-4 pt-10 pb-20 sm:px-6 sm:pt-14 sm:pb-28">
           <p className="font-extrabold text-white/85">{about.eyebrow}</p>
-          <h1 className="mt-2 text-4xl font-black tracking-tight text-balance sm:text-5xl">{about.title}</h1>
-          <p className="mt-4 max-w-2xl text-lg font-semibold text-pretty text-white/90 sm:text-xl">{about.intro}</p>
+          {/* This is the Khorezm branch's site: the branch first, then the brand it represents. */}
+          <h1 className="mt-2 text-4xl font-black tracking-tight text-balance sm:text-5xl">{about.branchTitle}</h1>
+          <p data-branch-text className="mt-4 max-w-2xl text-lg font-semibold text-pretty text-white/90 sm:text-xl">
+            {about.branchText}
+          </p>
+          <div className="mt-8 max-w-2xl rounded-3xl bg-white/12 p-5 ring-1 ring-white/25 backdrop-blur-sm sm:p-6">
+            <h2 className="text-2xl font-black text-balance sm:text-3xl">{about.title}</h2>
+            <p className="mt-2 font-semibold text-pretty text-white/90 sm:text-lg">{about.intro}</p>
+            <p className="mt-3 font-semibold text-white/85">
+              {dict.footer.mainSite}:{" "}
+              <a href={MAIN_BRAND_SITE.url} target="_blank" rel="noopener noreferrer" className="font-extrabold text-white underline underline-offset-2">
+                {MAIN_BRAND_SITE.label} ↗
+              </a>
+            </p>
+          </div>
         </div>
         <svg aria-hidden="true" viewBox="0 0 1440 70" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 h-8 w-full text-white sm:h-14">
           <path fill="currentColor" d="M0 42c120-26 240-34 360-16s240 44 360 30 240-52 360-50 240 28 360 34v30H0z" />

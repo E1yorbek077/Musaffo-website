@@ -1,6 +1,8 @@
-# Musaffo product showcase
+# Musaffo Khorezm
 
-Static Next.js site (App Router, TypeScript, Tailwind) in Uzbek (default), Russian and English.
+Website of the **Musaffo Khorezm branch**, the official branch and distributor of Musaffo (MCHJ QK «Milk House»)
+in the Khorezm region. It is not musaffo.uz, the main brand's separate site, which is only linked to as such.
+Next.js (App Router, TypeScript, Tailwind) in Uzbek (default), Russian and English, hosted on Netlify.
 
 ## Run
 
@@ -15,14 +17,15 @@ npm run preview  # same, on port 3100, to test offline and install next to `npm 
 npm run lint
 ```
 
-The site runs as a Node.js server, because orders go through `/api/order`. See [DEPLOY.md](DEPLOY.md) for
-putting it on a server. Copy `.env.example` to `.env.local` and fill it in.
+The site needs a server, because orders go through `/api/order`; on Netlify that is a serverless function. See
+[DEPLOY.md](DEPLOY.md) for deploying. Copy `.env.example` to `.env.local` and fill it in for local use.
 
 Offline and install only work in the production build, and on a real domain only over HTTPS. Any order placed
 from a server using your `.env.local`, including `npm run dev`, really is sent to the manager.
 
-Set `NEXT_PUBLIC_SITE_URL` at build time if the site won't live at `https://www.musaffo.uz`
-(used for canonical links, hreflang, the sitemap and social previews).
+**The site's own address** (canonical links, hreflang, Open Graph, the sitemap and robots.txt) comes from
+`lib/site-url.ts`: `NEXT_PUBLIC_SITE_URL`, else `URL` (set by Netlify during the build), else
+`http://localhost:3000` in development. A local production build (`npm run build`) needs `NEXT_PUBLIC_SITE_URL`.
 
 ## Edit content
 
@@ -31,7 +34,9 @@ Set `NEXT_PUBLIC_SITE_URL` at build time if the site won't live at `https://www.
 | Products and categories | `data/products.ts` |
 | Interface text | `i18n/uz.json`, `i18n/ru.json`, `i18n/en.json` |
 | Certificates | `data/certificates.ts` and `public/brand/certificates/` |
-| Contact details | `app/[locale]/contacts/page.tsx` and the `contacts` section of the i18n files |
+| The branch's contact details (footer, contacts page, phone on order slips) | `data/branch.ts`; an empty field isn't shown |
+| Site name in titles ("Musaffo Xorazm") | `meta.siteName` in the i18n files; titles are built in `lib/titles.ts` |
+| Favicon | `app/icon.svg`, then `node scripts/make-favicon.mjs` for `public/favicon.ico` |
 
 **Add a product:** put its PNG in `public/products/{category}/` and add an entry to `products` in
 `data/products.ts`. Its page, card, filters, sitemap entry and SEO tags are generated from that entry.
@@ -42,7 +47,8 @@ shelf in the home page fridge. Shelf placement per category is the `LAYOUT` tabl
 **Orders:** visitors build a list of boxes (`lib/order-list.ts`, page at `/{locale}/list/`), stored in their
 browser. `/{locale}/quick/` is a compact sheet of every product for entering quantities fast, and the last order
 can be repeated in one tap. Both use the same list. Placing an order posts it to `/api/order` (`lib/order-server.ts`), which looks up the products, sends
-the manager a Telegram message and adds a line to `data/orders.jsonl`. Customers get no Telegram message.
+the manager a Telegram message. Nothing is written to disk (Netlify doesn't keep files). Customers get no Telegram
+message.
 
 **Order slip and "My orders":** after an order is placed, the list page shows the shop's own copy of it as a
 till-style slip (`components/Receipt.tsx`): order number, date and time, who ordered (from the details the form just

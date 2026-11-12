@@ -961,7 +961,8 @@ export const products: Product[] = [
     name: {
       uz: "Qatiq 3%",
       ru: "Катык 3%",
-      en: "Qatiq 3%",
+      // "Qatiq" alone means nothing to an English reader.
+      en: "Qatiq (fermented milk) 3%",
     },
     description: {
       uz: "Sutdan an’anaviy usulda tayyorlangan qatiq, quyuq va ta’mi to‘yingan. 900 g hajmdagi chelakchada.",

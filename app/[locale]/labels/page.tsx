@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PriceLabels } from "@/components/PriceLabels";
 import { getDictionary, type Locale } from "@/i18n";
 import { pageMetadata } from "@/lib/seo";
+import { pageTitle } from "@/lib/titles";
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ...pageMetadata({
       locale,
       path: "/labels/",
-      title: `${labels.title} | Musaffo`,
+      title: pageTitle(labels.title, locale),
       description: labels.metaDescription,
     }),
     // A working tool for shops: product and catalog pages are what should appear in search results.

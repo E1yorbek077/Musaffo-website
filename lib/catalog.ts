@@ -1,7 +1,5 @@
 import { categories, products, type CategorySlug, type Product } from "@/data/products";
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.musaffo.uz").replace(/\/$/, "");
-
 export function getProduct(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }

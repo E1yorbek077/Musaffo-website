@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CatalogBrowser } from "@/components/CatalogBrowser";
 import { getDictionary, type Locale } from "@/i18n";
 import { pageMetadata } from "@/lib/seo";
+import { pageTitle } from "@/lib/titles";
 
 type Props = { params: Promise<{ locale: Locale }> };
 
@@ -11,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return pageMetadata({
     locale,
     path: "/catalog/",
-    title: `${dict.meta.catalogTitle} | Musaffo`,
+    title: pageTitle(dict.meta.catalogTitle, locale),
     description: dict.meta.catalogDescription,
   });
 }
