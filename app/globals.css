@@ -1,0 +1,1262 @@
+@import "tailwindcss";
+
+/* Colours sampled from the Musaffo logo vectors and catalog cover. */
+@theme {
+  --color-brand: #005aaa;
+  --color-brand-bright: #006cb7;
+  --color-sky: #0190d2;
+  --color-sky-soft: #bfe3f7;
+  --color-mist: #eaf6fd;
+  --color-navy: #0a2f57;
+  --color-slate: #4a6580;
+  --color-line: #d4e6f3;
+  --color-leaf: #1f8a56;
+  --color-leaf-dark: #157347;
+  --color-leaf-soft: #e3f5ec;
+  --color-engil: #c8313f;
+  --color-engil-soft: #fdebed;
+  --color-immun: #9a4900;
+  --color-immun-soft: #fff1e0;
+
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(10 47 87 / 0.05), 0 8px 24px -12px rgb(10 47 87 / 0.18);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+body {
+  background: #fff;
+  color: var(--color-navy);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-sky);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ───────── The home page fridge ───────── */
+
+.fridge-cabinet {
+  position: relative;
+  border-radius: 1.5rem;
+  background: linear-gradient(180deg, #f4f8fb, #cfdbe4);
+  padding: 0.5rem;
+  color: var(--color-navy);
+  box-shadow: 0 30px 60px -20px rgb(0 30 70 / 0.65), inset 0 1px 0 #fff;
+}
+
+.fridge-top {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 1.1rem 1.1rem 0 0;
+  background: linear-gradient(100deg, #006cb7, #005aaa);
+  padding: 0.5rem 0.875rem;
+}
+
+.fridge-led {
+  justify-self: start;
+  border-radius: 0.4rem;
+  background: #06223f;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #7fe3ff;
+  text-shadow: 0 0 8px rgb(127 227 255 / 0.8);
+}
+
+.fridge-interior {
+  position: relative;
+  perspective: 1800px;
+  background:
+    repeating-linear-gradient(90deg, rgb(1 144 210 / 0.05) 0 1px, transparent 1px 56px),
+    linear-gradient(180deg, #fff 0%, #e8f5fd 55%, #d3eaf9 100%);
+  box-shadow: inset 0 0 0 1px rgb(10 47 87 / 0.12), inset 0 14px 22px -14px rgb(10 47 87 / 0.35);
+}
+
+.fridge-lightbar {
+  height: 5px;
+  background: linear-gradient(90deg, #d7efff, #fff 20%, #fff 80%, #d7efff);
+  box-shadow: 0 2px 22px 6px rgb(255 255 255 / 0.95);
+}
+
+.fridge-items {
+  display: flex;
+  height: 8.25rem;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding: 0.625rem 0.75rem 0;
+}
+
+.fridge-items::-webkit-scrollbar {
+  display: none;
+}
+
+.fridge-items > li {
+  height: 100%;
+}
+
+.fridge-item {
+  position: relative;
+  display: block;
+  height: 100%;
+  transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+
+.fridge-item:hover,
+.fridge-item:focus-visible {
+  z-index: 5;
+  transform: translateY(-6px) scale(1.07);
+}
+
+.fridge-pack {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 4px rgb(10 47 87 / 0.28));
+  animation: pack-settle 0.5s ease-out both;
+  animation-delay: calc(0.75s + var(--i) * 14ms);
+}
+
+/* Shelf edge: glass lip plus the category label strip */
+.fridge-rail {
+  display: flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-top: 3px solid rgb(120 190 235 / 0.65);
+  background: linear-gradient(180deg, #fff, #e4f1fa);
+  padding: 0 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  box-shadow: 0 7px 12px -6px rgb(10 47 87 / 0.3);
+}
+
+.fridge-rail:hover {
+  color: var(--color-brand);
+}
+
+.fridge-rail-arrow {
+  transition: transform 0.2s;
+}
+
+.fridge-rail:hover .fridge-rail-arrow {
+  transform: translateX(3px);
+}
+
+.fridge-tag {
+  display: none;
+}
+
+.fridge-grille {
+  height: 1.25rem;
+  border-radius: 0 0 1.1rem 1.1rem;
+  background: repeating-linear-gradient(180deg, #7f92a3 0 2px, #aebdc9 2px 5px);
+}
+
+@media (min-width: 64rem) {
+  .fridge-cabinet {
+    padding: 0.625rem;
+  }
+
+  .fridge-group {
+    flex: var(--grow) 1 0;
+  }
+
+  .fridge-group + .fridge-group .fridge-rail {
+    border-left: 1px solid rgb(10 47 87 / 0.14);
+  }
+
+  .fridge-items {
+    height: 9.75rem;
+    gap: 0.25rem;
+    overflow: visible;
+    padding: 0.625rem 0.625rem 0;
+  }
+
+  .fridge-items-stacked {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: column;
+    gap: 0;
+  }
+
+  .fridge-items-stacked > li {
+    min-height: 0;
+  }
+
+  .fridge-rail {
+    min-height: 2rem;
+    font-size: 0.8125rem;
+  }
+
+  /* A price-tag label appears above the shelf edge on hover or keyboard focus */
+  .fridge-tag {
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    display: block;
+    max-width: 15rem;
+    overflow: hidden;
+    transform: translateX(-50%) translateY(4px);
+    border-radius: 999px;
+    background: var(--color-navy);
+    padding: 0.2rem 0.65rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+
+  .fridge-item:hover .fridge-tag,
+  .fridge-item:focus-visible .fridge-tag {
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+}
+
+/* Door swings open, lights flicker on, cold air rolls out. Plays once on load. */
+.fridge-door {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  transform-origin: left center;
+  border: 3px solid rgb(255 255 255 / 0.9);
+  background: linear-gradient(115deg, rgb(255 255 255 / 0.75), rgb(190 228 250 / 0.5) 42%, rgb(255 255 255 / 0.68) 60%, rgb(190 228 250 / 0.55));
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-shadow: 18px 0 40px rgb(0 30 70 / 0.25);
+  pointer-events: none;
+  animation: door-open 1.15s cubic-bezier(0.55, 0.05, 0.3, 1) 0.4s both;
+}
+
+.fridge-door-handle {
+  position: absolute;
+  top: 28%;
+  right: 1rem;
+  bottom: 28%;
+  width: 0.5rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #90a4b4, #f3f7fa 45%, #7f92a3);
+  box-shadow: 0 4px 8px rgb(0 30 70 / 0.35);
+}
+
+.fridge-door-logo {
+  width: min(45%, 20rem);
+  height: auto;
+}
+
+.fridge-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgb(6 34 63 / 0.55);
+  pointer-events: none;
+  animation: lights-on 0.8s linear 0.65s both;
+}
+
+.fridge-mist {
+  position: absolute;
+  right: -3%;
+  bottom: -6%;
+  left: -3%;
+  z-index: 15;
+  height: 55%;
+  background: radial-gradient(ellipse at 50% 100%, rgb(255 255 255 / 0.95), rgb(255 255 255 / 0.5) 45%, transparent 72%);
+  filter: blur(14px);
+  pointer-events: none;
+  animation: cold-mist 2.3s ease-out 0.75s both;
+}
+
+@keyframes door-open {
+  0% {
+    transform: rotateY(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(-100deg);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes lights-on {
+  0% {
+    opacity: 1;
+  }
+  22% {
+    opacity: 0.25;
+  }
+  34% {
+    opacity: 0.8;
+  }
+  52% {
+    opacity: 0.1;
+  }
+  62% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes cold-mist {
+  0% {
+    opacity: 0;
+    transform: translateY(16%) scaleY(0.7);
+  }
+  28% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(26%) scaleY(1.25);
+    visibility: hidden;
+  }
+}
+
+@keyframes pack-settle {
+  from {
+    transform: translateY(7px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* How many boxes of this pack are in the visitor's list */
+.fridge-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: grid;
+  height: 1.375rem;
+  min-width: 1.375rem;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--color-leaf-dark);
+  padding: 0 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: #fff;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* ───────── Home page: the range, one colour panel per category ───────── */
+
+.range-panel,
+.category-stage {
+  background:
+    radial-gradient(55% 75% at var(--glow-x, 28%) 55%, rgb(255 255 255 / 0.85), transparent 70%),
+    radial-gradient(80% 90% at var(--glow-x, 28%) 60%, var(--stage-mid), transparent 75%),
+    var(--stage-soft);
+}
+
+.range-panel {
+  /* Panels below the screen aren't laid out or painted until they come near: keeps the first load light */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 38rem;
+}
+
+/* Category page: the glow sits behind the packs (on the right from tablet up, on top on phones) */
+.category-stage {
+  --glow-x: 50%;
+}
+
+@media (min-width: 48rem) {
+  .category-stage {
+    --glow-x: 72%;
+  }
+}
+
+/* The six categories as aisles, each in its own colour */
+.aisle {
+  display: inline-flex;
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.375rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.7);
+  padding: 0.125rem 0.875rem 0.125rem 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+  white-space: nowrap;
+  color: var(--aisle-ink);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.aisle:hover {
+  border-color: var(--aisle-mid);
+  background: #fff;
+}
+
+.aisle[aria-current] {
+  border-color: var(--aisle-ink);
+  background: var(--aisle-ink);
+  color: #fff;
+}
+
+.aisle img {
+  filter: drop-shadow(0 2px 2px rgb(10 30 60 / 0.25));
+}
+
+.aisles {
+  scrollbar-width: none;
+}
+
+.aisles::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .range-panel:nth-of-type(even) {
+    --glow-x: 72%;
+  }
+}
+
+/* Packs stand side by side, overlapping, the centre one in front and tallest */
+.range-fan {
+  --fan-h: clamp(13rem, 34vw, 25rem);
+  position: relative;
+  display: flex;
+  /* Room for the tilted outer packs, so a narrow phone doesn't clip them */
+  padding-inline: clamp(0.75rem, 4vw, 1.5rem);
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Sized by width, so wide cups and the butter block stand as large as the bottles, capped in height */
+.range-pack {
+  display: flex;
+  width: var(--pack-w);
+  max-height: var(--fan-h);
+  min-width: 0;
+  aspect-ratio: var(--pack-ratio);
+  /* Shrinks to fit its column: five wide cups must not run into the text beside them */
+  flex: 0 1 auto;
+  align-items: flex-end;
+  justify-content: center;
+  margin-inline: calc(var(--pack-w) * -0.14);
+  transform: translateY(calc(var(--ad) * 7%)) rotate(calc(var(--d) * 4deg)) scale(calc(1 - var(--ad) * 0.07));
+  transform-origin: 50% 100%;
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+
+.range-pack img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;
+  filter: drop-shadow(0 18px 18px rgb(10 30 60 / 0.28));
+}
+
+.range-pack:hover,
+.range-pack:focus-visible {
+  z-index: 20 !important;
+  transform: translateY(-4%) rotate(0deg) scale(1.06);
+}
+
+/* On phones, five wide cups would each be thumbnail-sized: the middle three stand larger instead */
+@media (max-width: 47.99rem) {
+  .range-fan[data-wide] .range-pack:first-child:nth-last-child(5),
+  .range-fan[data-wide] .range-pack:last-child:nth-child(5) {
+    display: none;
+  }
+}
+
+/* Floor shadow under the fan */
+.range-fan::after {
+  content: "";
+  position: absolute;
+  right: 12%;
+  bottom: -0.6rem;
+  left: 12%;
+  z-index: 0;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(10 30 60 / 0.25), transparent);
+}
+
+/* As a panel scrolls in, its packs rise onto the floor one after another (browsers with scroll timelines) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .range-pack img {
+      animation: pack-rise linear both;
+      animation-timeline: view();
+      animation-range: entry calc(5% + var(--ad) * 8%) cover calc(30% + var(--ad) * 8%);
+    }
+  }
+}
+
+/* At the top of a category page the packs are in view from the start: they rise once, on load, not with scrolling */
+.category-stage .range-pack img {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .category-stage .range-pack img {
+    animation: pack-rise 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.1) both;
+    animation-timeline: auto;
+    animation-delay: calc(var(--ad) * 90ms);
+  }
+}
+
+@keyframes pack-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18%);
+  }
+}
+
+/* ───────── Product page: the rest of the category on a fridge shelf ───────── */
+
+.shelf-case {
+  border-radius: 1.25rem;
+  background: linear-gradient(180deg, #f4f8fb, #cfdbe4);
+  padding: 0.375rem;
+  box-shadow: 0 24px 44px -26px rgb(0 30 70 / 0.6), inset 0 1px 0 #fff;
+}
+
+.shelf-row {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgb(10 47 87 / 0.12);
+}
+
+.shelf-row::-webkit-scrollbar {
+  display: none;
+}
+
+.shelf-tile {
+  display: flex;
+  flex: 0 0 9.25rem;
+  flex-direction: column;
+  scroll-snap-align: start;
+}
+
+.shelf-tile + .shelf-tile .shelf-tag {
+  border-left: 1px solid rgb(10 47 87 / 0.08);
+}
+
+.shelf-slot {
+  position: relative;
+  display: flex;
+  height: 8.75rem;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1.25rem 0.75rem 0;
+  background:
+    repeating-linear-gradient(90deg, rgb(1 144 210 / 0.05) 0 1px, transparent 1px 56px),
+    linear-gradient(180deg, #fff 0%, #e8f5fd 55%, #d3eaf9 100%);
+  box-shadow: inset 0 14px 22px -16px rgb(10 47 87 / 0.35);
+}
+
+.shelf-slot img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 4px rgb(10 47 87 / 0.28));
+  transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+}
+
+.shelf-slot:hover img,
+.shelf-slot:focus-visible img {
+  transform: translateY(-6px) scale(1.06);
+}
+
+/* The pack this page is about: lit from above */
+.shelf-tile[aria-current] .shelf-slot {
+  background:
+    radial-gradient(60% 70% at 50% 0%, rgb(255 255 255 / 0.95), transparent 70%),
+    linear-gradient(180deg, var(--stage-soft) 0%, var(--stage-mid) 140%);
+}
+
+.shelf-here {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  z-index: 2;
+  border-radius: 999px;
+  background: var(--stage-ink);
+  padding: 0.1rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.shelf-check {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  z-index: 2;
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--color-leaf-dark);
+  font-size: 0.8125rem;
+  font-weight: 900;
+  color: #fff;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+/* Shelf edge: glass lip, green under packs already on the list */
+.shelf-lip {
+  height: 0.5rem;
+  border-top: 3px solid rgb(120 190 235 / 0.65);
+  background: linear-gradient(180deg, #fff, #e4f1fa);
+  box-shadow: 0 7px 12px -6px rgb(10 47 87 / 0.3);
+  transition: border-color 0.3s;
+}
+
+.shelf-tile[data-on-list] .shelf-lip {
+  border-top-color: var(--color-leaf);
+}
+
+.shelf-tag {
+  flex: 1;
+  padding: 0.625rem 0.625rem 0.75rem;
+}
+
+.shelf-pop {
+  animation: shelf-pop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.4);
+}
+
+@keyframes shelf-pop {
+  0% {
+    transform: translateY(-14px) scale(1.12);
+  }
+}
+
+@media (min-width: 48rem) {
+  .shelf-row {
+    display: grid;
+    grid-template-columns: repeat(var(--cols-md), minmax(0, 15rem));
+    overflow: visible;
+    /* A shorter last row ends in empty, lit shelf rather than white */
+    background:
+      repeating-linear-gradient(90deg, rgb(1 144 210 / 0.05) 0 1px, transparent 1px 56px),
+      linear-gradient(180deg, #fff 0%, #e8f5fd 55%, #d3eaf9 100%);
+  }
+
+  .shelf-tag {
+    background: #fff;
+  }
+
+  /* A short shelf is as wide as its packs, not the page */
+  .shelf-case {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .shelf-tile + .shelf-tile .shelf-tag {
+    border-left: 0;
+  }
+
+  .shelf-tag {
+    border-right: 1px solid rgb(10 47 87 / 0.08);
+  }
+}
+
+@media (min-width: 64rem) {
+  .shelf-row {
+    grid-template-columns: repeat(var(--cols-lg), minmax(0, 15rem));
+  }
+}
+
+@media (min-width: 80rem) {
+  .shelf-row {
+    grid-template-columns: repeat(var(--cols-xl), minmax(0, 15rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shelf-pop {
+    animation: none;
+  }
+}
+
+/* ───────── Order receipt: paper with scalloped ends, like a till slip ───────── */
+
+.receipt-shadow {
+  filter: drop-shadow(0 18px 28px rgb(10 47 87 / 0.2));
+}
+
+.receipt {
+  --hole: 7px;
+  --step: 22px;
+  overflow: hidden;
+  background: #fff;
+  -webkit-mask:
+    radial-gradient(circle at 50% 0, #0000 var(--hole), #000 calc(var(--hole) + 0.5px)) 50% 0 / var(--step) 51% repeat-x,
+    radial-gradient(circle at 50% 100%, #0000 var(--hole), #000 calc(var(--hole) + 0.5px)) 50% 100% / var(--step) 51% repeat-x;
+  mask:
+    radial-gradient(circle at 50% 0, #0000 var(--hole), #000 calc(var(--hole) + 0.5px)) 50% 0 / var(--step) 51% repeat-x,
+    radial-gradient(circle at 50% 100%, #0000 var(--hole), #000 calc(var(--hole) + 0.5px)) 50% 100% / var(--step) 51% repeat-x;
+}
+
+/* A new receipt slides up out of the till */
+.receipt-print {
+  animation: receipt-out 0.7s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+
+@keyframes receipt-out {
+  from {
+    transform: translateY(-28px);
+    clip-path: inset(0 -40px 100% -40px);
+  }
+  to {
+    clip-path: inset(-40px -40px -60px -40px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .receipt-print {
+    animation: none;
+  }
+}
+
+@media print {
+  .receipt-shadow {
+    filter: none;
+  }
+}
+
+/* ───────── Order list ───────── */
+
+.order-bar {
+  animation: bar-in 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+.list-bump {
+  animation: list-bump 0.32s ease-out;
+}
+
+@keyframes bar-in {
+  from {
+    transform: translateY(120%);
+  }
+}
+
+@keyframes list-bump {
+  40% {
+    transform: scale(1.14);
+  }
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+/* ───────── Product flavour stage ───────── */
+
+/* Registered so browsers can animate them: swiping a flavour morphs the whole page colour. */
+@property --stage-soft {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #e3f3fd;
+}
+@property --stage-mid {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #9fd4f5;
+}
+@property --stage-ink {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #004d93;
+}
+
+.tint-scope {
+  transition: --stage-soft 0.55s ease, --stage-mid 0.55s ease, --stage-ink 0.55s ease;
+}
+
+.tint-tile {
+  background: radial-gradient(circle at 50% 45%, #fff 0%, var(--stage-soft) 55%, var(--stage-mid) 135%);
+}
+
+.flavour-stage {
+  background:
+    radial-gradient(70% 34% at 50% 24%, var(--stage-mid), transparent 100%),
+    var(--stage-soft);
+}
+
+.stage-grid {
+  display: grid;
+  grid-template-areas: "crumbs" "pack" "info";
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0.25rem;
+}
+
+.pack-box {
+  position: relative;
+  grid-area: pack;
+  height: clamp(12rem, 34dvh, 19rem);
+  overflow: hidden;
+  container-type: size;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pack-box.is-dragging {
+  cursor: grabbing;
+}
+
+/* The giant flavour word behind the pack. Sized from its own letter count so it always fits. */
+.stage-word {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: min(calc(94cqw / (var(--chars) * 0.8)), calc(88cqh / (var(--lines) * 0.92)), 10rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--stage-ink) 24%, transparent);
+  pointer-events: none;
+  animation: word-in 0.5s ease-out both;
+}
+
+.stage-slide {
+  position: absolute;
+  top: 2%;
+  bottom: 2.25rem; /* Room for the pack's shadow, which the stage would otherwise cut off. */
+  left: 50%;
+  display: flex;
+  width: var(--slot);
+  margin-left: calc(var(--slot) / -2);
+  cursor: pointer;
+  opacity: 0.55;
+  transform: translateX(calc((var(--n) - var(--active)) * var(--slot) + var(--drag, 0px))) scale(0.62);
+  transition:
+    transform 0.5s cubic-bezier(0.25, 0.9, 0.3, 1),
+    opacity 0.35s ease;
+}
+
+.stage-slide[data-active] {
+  z-index: 2;
+  cursor: inherit;
+  opacity: 1;
+  transform: translateX(calc((var(--n) - var(--active)) * var(--slot) + var(--drag, 0px)));
+}
+
+.is-dragging .stage-slide {
+  transition: none;
+}
+
+.stage-pack {
+  filter: drop-shadow(0 14px 14px color-mix(in srgb, var(--stage-ink) 38%, transparent));
+}
+
+.stage-chips {
+  scrollbar-width: none;
+}
+
+.stage-chips::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .flavour-stage {
+    background:
+      radial-gradient(38% 62% at 73% 46%, var(--stage-mid), transparent 100%),
+      var(--stage-soft);
+  }
+
+  .stage-grid {
+    grid-template-areas: "crumbs pack" "info pack";
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 2.5rem;
+  }
+
+  .pack-box {
+    height: clamp(22rem, 66vh, 30rem);
+    mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  }
+}
+
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+/* ───────── Quick order sheet ───────── */
+
+/* A row reached by keyboard must not end up under the sticky tabs or the order bar. */
+[data-sheet-row] {
+  scroll-margin: 8rem 0 6rem;
+}
+
+/* ───────── Shelf price labels ─────────
+ * Every size inside a label is a share of the label's own width (cqw), so the on-screen preview is the print, scaled.
+ * Print: A4 with 8 mm margins leaves 194 × 281 mm: large labels are 97 × 70 mm (2 × 4), small 64.6 × 35 mm (3 × 8). */
+
+.label-sheet {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.price-label {
+  --ratio: 97 / 70;
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: var(--ratio);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 0.75rem;
+  background: #fff;
+  color: var(--color-navy);
+  font-family: inherit;
+}
+
+.price-label-grid {
+  display: grid;
+  grid-template-columns: 28cqw minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "band band"
+    "pack text"
+    "pack price";
+  height: 100%;
+}
+
+.label-sheet[data-size="small"] .price-label {
+  --ratio: 64.6 / 35;
+}
+
+/* With a QR code, the bottom-left cell holds it and the pack sits above. Large: 19 mm, small: about 12 mm across,
+ * so each square of the code is 0.4 mm or more, which phone cameras read from a hand's length away. */
+.price-label-grid[data-qr] {
+  grid-template-areas:
+    "band band"
+    "pack text"
+    "qr price";
+}
+
+.price-label-qr {
+  grid-area: qr;
+  align-self: end;
+  justify-self: start;
+  width: 20cqw;
+  margin: 0 0 2.4cqw 3.5cqw;
+}
+
+.price-label-qr svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.label-sheet[data-size="small"] .price-label-qr {
+  width: 18.5cqw;
+  margin: 0 0 1.6cqw 2.2cqw;
+}
+
+.price-label-band {
+  grid-area: band;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2cqw;
+  padding: 2cqw 4cqw;
+  background: linear-gradient(100deg, var(--stage-soft), var(--stage-mid));
+}
+
+.price-label-logo {
+  width: 24cqw;
+  height: auto;
+}
+
+.price-label-line {
+  border-radius: 999px;
+  background: #fff;
+  padding: 0.4cqw 2.4cqw;
+  color: var(--stage-ink);
+  font-size: 3.6cqw;
+  font-weight: 900;
+}
+
+/* The pack fills the left column under the band, whatever its shape: tall bottle, wide butter pack, small cup. */
+.price-label-body {
+  display: contents;
+}
+
+.price-label-pack {
+  grid-area: pack;
+  position: relative;
+  margin: 3cqw 0 3cqw 3.5cqw;
+}
+
+.price-label-pack img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.price-label-text {
+  grid-area: text;
+  align-self: center;
+  min-width: 0;
+  padding: 2cqw 4cqw 0 3.5cqw;
+}
+
+.price-label-name {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-size: 5cqw;
+  font-weight: 900;
+  line-height: 1.12;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.price-label-meta {
+  margin-top: 1cqw;
+  color: var(--stage-ink);
+  font-size: 4cqw;
+  font-weight: 800;
+}
+
+.price-label-price {
+  grid-area: price;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-end;
+  column-gap: 1.6cqw;
+  padding: 0 4cqw 2.4cqw;
+  line-height: 1;
+}
+
+.price-label-price strong {
+  font-size: 12.5cqw;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.price-label-blank {
+  display: inline-block;
+  width: 40cqw;
+  height: 10cqw;
+  border-bottom: 0.5cqw solid var(--color-navy);
+}
+
+.price-label-currency {
+  font-size: 5cqw;
+  font-weight: 900;
+}
+
+.price-label-per {
+  flex-basis: 100%;
+  margin-top: 0.6cqw;
+  text-align: right;
+  color: var(--color-slate);
+  font-size: 2.8cqw;
+  font-weight: 700;
+}
+
+/* Small labels: the band shrinks and the details make room for the price. */
+.label-sheet[data-size="small"] .price-label-band {
+  padding: 1.4cqw 3.5cqw;
+}
+.label-sheet[data-size="small"] .price-label-logo {
+  width: 19cqw;
+}
+.label-sheet[data-size="small"] .price-label-grid {
+  grid-template-columns: 21cqw minmax(0, 1fr);
+}
+.label-sheet[data-size="small"] .price-label-pack {
+  margin: 2cqw 0 2cqw 2.5cqw;
+}
+.label-sheet[data-size="small"] .price-label-text {
+  padding-top: 1.2cqw;
+}
+.label-sheet[data-size="small"] .price-label-name {
+  -webkit-line-clamp: 2;
+  font-size: 4.6cqw;
+}
+.label-sheet[data-size="small"] .price-label-meta {
+  margin-top: 0.4cqw;
+  font-size: 3.6cqw;
+}
+.label-sheet[data-size="small"] .price-label-price strong {
+  font-size: 10cqw;
+}
+.label-sheet[data-size="small"] .price-label-blank {
+  height: 8cqw;
+}
+.label-sheet[data-size="small"] .price-label-per {
+  display: none;
+}
+
+@page labels {
+  size: A4;
+  margin: 8mm;
+}
+
+@media print {
+  .label-sheet {
+    page: labels;
+    width: 194mm;
+    height: 280mm;
+    gap: 0;
+    grid-template-rows: repeat(var(--rows), calc(280mm / var(--rows)));
+    align-content: start;
+    break-after: page;
+  }
+  .label-sheet:last-child {
+    break-after: auto;
+  }
+  .label-sheet .price-label {
+    aspect-ratio: auto;
+    height: 100%;
+    border: 0.25mm dashed #9fb3c6;
+    border-radius: 0;
+  }
+}
+
+/* The order text box grows with what's pasted, where browsers support it. */
+.paste-input {
+  field-sizing: content;
+}
+
+.sheet-input:focus {
+  border-radius: 0.5rem;
+  background: var(--color-mist);
+}
+
+html:has([data-offline-strip]) .quick-tabs {
+  top: 5.75rem;
+}
+
+/* ───────── Search sheet ───────── */
+
+/* Opens from the top, so the phone keyboard never covers the results. The layout is set only
+   while open: a display class on the element would also show it while closed. */
+.quick-view.search-sheet[open] {
+  display: flex;
+  flex-direction: column;
+  animation: sheet-down 0.22s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+@keyframes sheet-down {
+  from {
+    transform: translateY(-24px);
+    opacity: 0;
+  }
+}
+
+/* ───────── Certificate lightbox ───────── */
+
+.lightbox {
+  border: 0;
+  overflow: visible;
+}
+
+.lightbox::backdrop {
+  background: rgb(10 47 87 / 0.8);
+}
+
+/* ───────── Product quick view ───────── */
+
+.quick-view {
+  border: 0;
+  padding: 0;
+}
+
+.quick-view[open] {
+  animation: sheet-up 0.28s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.quick-view::backdrop {
+  background: rgb(10 47 87 / 0.55);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+  .fridge-door,
+  .fridge-dim,
+  .fridge-mist {
+    display: none;
+  }
+  .fridge-pack,
+  .quick-view[open],
+  .order-bar,
+  .list-bump,
+  .stage-word,
+  .quick-view.search-sheet[open] {
+    animation: none;
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "/",
+  "name": "Musaffo: каталог продукции",
+  "short_name": "Musaffo",
+  "description": "Каталог молочной продукции Musaffo и список заказа. Работает и без интернета.",
+  "lang": "ru",
+  "start_url": "/ru/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#005aaa",
+  "theme_color": "#005aaa",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Каталог", "url": "/ru/catalog/", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Список заказа", "url": "/ru/list/", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Заказ текстом", "url": "/ru/quick/#paste", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ],
+  "share_target": { "action": "/ru/quick/", "method": "GET", "enctype": "application/x-www-form-urlencoded", "params": { "title": "title", "text": "text" } }
+}

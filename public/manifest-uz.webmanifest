@@ -1,0 +1,23 @@
+{
+  "id": "/",
+  "name": "Musaffo: mahsulotlar katalogi",
+  "short_name": "Musaffo",
+  "description": "Musaffo sut mahsulotlari katalogi va buyurtma ro‘yxati. Internetsiz ham ishlaydi.",
+  "lang": "uz",
+  "start_url": "/uz/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#005aaa",
+  "theme_color": "#005aaa",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Katalog", "url": "/uz/catalog/", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Buyurtma ro‘yxati", "url": "/uz/list/", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Buyurtma matni", "url": "/uz/quick/#paste", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ],
+  "share_target": { "action": "/uz/quick/", "method": "GET", "enctype": "application/x-www-form-urlencoded", "params": { "title": "title", "text": "text" } }
+}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#005aaa" />
+    <meta name="robots" content="noindex" />
+    <title>Musaffo</title>
+    <style>
+      :root { color-scheme: light; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100dvh; display: grid; place-items: center; padding: 24px 16px; background: linear-gradient(160deg, #eaf6fd, #fff); color: #0a2f57; font-family: ui-sans-serif, system-ui, sans-serif; text-align: center; }
+      main { max-width: 26rem; }
+      img { width: 150px; height: auto; }
+      h1 { margin: 24px 0 4px; font-size: 1.5rem; font-weight: 900; color: #005aaa; }
+      p { margin: 4px 0 0; font-weight: 600; color: #4a6580; }
+      nav { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 24px; }
+      a, button { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 999px; border: 2px solid #005aaa; background: #fff; color: #005aaa; font: inherit; font-weight: 800; text-decoration: none; cursor: pointer; }
+      button { background: #005aaa; color: #fff; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/brand/logo.svg" alt="Musaffo" width="150" height="46" />
+      <h1>Bu sahifa hali saqlanmagan</h1>
+      <p>Internet yo‘q. Saqlangan katalogni oching yoki internet qaytgach qayta urining.</p>
+      <h1 lang="ru">Эта страница ещё не сохранена</h1>
+      <p lang="ru">Нет интернета. Откройте сохранённый каталог или повторите, когда интернет появится.</p>
+      <h1 lang="en">This page isn’t saved yet</h1>
+      <p lang="en">No internet. Open the saved catalog, or try again when you’re back online.</p>
+      <nav>
+        <button type="button" onclick="location.reload()">Qayta urinish / Повторить / Try again</button>
+        <a href="/uz/catalog/">Katalog</a>
+        <a href="/ru/catalog/" lang="ru">Каталог</a>
+        <a href="/en/catalog/" lang="en">Catalog</a>
+      </nav>
+    </main>
+  </body>
+</html>

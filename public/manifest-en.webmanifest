@@ -1,0 +1,23 @@
+{
+  "id": "/",
+  "name": "Musaffo: product catalog",
+  "short_name": "Musaffo",
+  "description": "The Musaffo dairy catalog and order list. Also works without internet.",
+  "lang": "en",
+  "start_url": "/en/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#005aaa",
+  "theme_color": "#005aaa",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Catalog", "url": "/en/catalog/", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Order list", "url": "/en/list/", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Order as text", "url": "/en/quick/#paste", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ],
+  "share_target": { "action": "/en/quick/", "method": "GET", "enctype": "application/x-www-form-urlencoded", "params": { "title": "title", "text": "text" } }
+}
